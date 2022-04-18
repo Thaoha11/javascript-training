@@ -1,6 +1,7 @@
 Array.prototype.filter2 = function (callback) {
     var output = [], arrayLength = this.length;
     for (i = 0; i < arrayLength; i++) {
+        // Check if a property exists in Object or not
         if (this.hasOwnProperty(i)) {
             var result = callback(this[i], i)
             if (result) {
@@ -28,6 +29,6 @@ var myInfo = [
 
 var filterMyInfo = myInfo.filter2(function (myInfo) {
     // console.log(myInfo)
-    return myInfo.age > 30;
+    return myInfo.name == 'Thao';
 });
 console.log(filterMyInfo);  
