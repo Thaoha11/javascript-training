@@ -27,4 +27,27 @@ const b = { name: 'Thao' }
 b.name = 'Ha'
 console.log(b.name)
 
+// Function scope
+
+// const age=18;
+function logger() {
+    const age = 18;
+    function logger2() {
+        console.log(age)
+    }
+    logger2()
+}
+logger()
+
+
+// 
+const gender = 'female'
+{
+    {
+        const gender = 'male'
+        {
+            console.log(gender)
+        }
+    }
+}
 
