@@ -25,3 +25,4 @@ console.log(boxNode.querySelector('p'))
 // console.log(document.forms.test)
 // console.log(document.anchors)
 
+document.getElementById('heading').style.color = 'red'
