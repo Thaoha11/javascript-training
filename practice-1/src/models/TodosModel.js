@@ -20,12 +20,13 @@ export default class Model {
         }
 
         this.todos.push(todo)
-        console.log(todo)
+        // console.log(todo)
         this._commit(this.todos)
     }
 
 
 }
+
 
 
 

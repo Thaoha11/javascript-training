@@ -10,12 +10,13 @@
 </head>
 
 <body>
-    <section class="todoapp">
+    <section class="todoapp" id='root'>
         <header class="header">
             <h1>todos</h1>
             <input class="new-todo" placeholder="What needs to be done?" autofocus>
         </header>
         <section class="main">
+
             <input id="toggle-all" class="toggle-all" type="checkbox">
             <label for="toggle-all">Mark all as complete</label>
             <ul class="todo-list"></ul>
@@ -42,6 +43,10 @@
         <p>Refactored by <a href="https://github.com/cburgmer">Christoph Burgmer</a></p>
         <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
     </footer>
+
+    <script type="module" src='./main.js'></script>
+    <!-- <script type="module" src='./models/TodosModel.js'></script> -->
+    <!-- <script type="module" src='./views/TodosView.js'></script> -->
 </body>
 
 </html>
