@@ -2,13 +2,14 @@
   "name": "practice-1",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "dependencies": {
     "json-server": "^0.17.0",
     "parcel": "^2.5.0"
   },
   "devDependencies": {},
   "scripts": {
+    "start": "parcel src/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
