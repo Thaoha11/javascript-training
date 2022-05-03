@@ -6,7 +6,7 @@ export default class Controller {
         // Explicit this binding
         this.model.bindTodoListChanged(this.onTodoListChanged)
         this.view.bindAddTodo(this.handleAddTodo)
-
+        this.view.bindDeleteTodo(this.handleDeleteTodo)
 
         // Display initial todos
         this.onTodoListChanged(this.model.todos)
@@ -20,4 +20,7 @@ export default class Controller {
         this.model.addTodo(todoText)
     }
 
+    handleDeleteTodo = id => {
+        this.model.deleteTodo(id)
+    }
 }
