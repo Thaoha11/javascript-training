@@ -88,6 +88,17 @@ export default class View {
         })
     }
 
+    bindDeleteTodo(handler) {
+        this.todoList.addEventListener('click', e => {
+            e.preventDefault()
+            console.log(e)
+            if (e.target.className === 'delete') {
+                const id = parseInt(e.target.parentElement.id)
+                handler(id)
+            }
+
+        })
+    }
 
 }
 
