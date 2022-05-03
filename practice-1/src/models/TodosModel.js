@@ -24,6 +24,11 @@ export default class Model {
         this._commit(this.todos)
     }
 
+    deleteTodo(id) {
+        this.todos = this.todos.filter(todo => todo.id !== id)
+
+        this._commit(this.todos)
+    }
 
 }
 
