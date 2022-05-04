@@ -6,7 +6,8 @@ export default class View {
         this.main = this.getElement('.main')
         this.todoList = this.getElement('ul')
 
-
+        this._temporaryTodoText = ''
+        this._initLocalListeners()
     }
 
     get _todoText() {
@@ -91,7 +92,7 @@ export default class View {
     bindDeleteTodo(handler) {
         this.todoList.addEventListener('click', e => {
             e.preventDefault()
-            console.log(e)
+            // console.log(e)
             if (e.target.className === 'delete') {
                 const id = parseInt(e.target.parentElement.id)
                 handler(id)
@@ -99,6 +100,35 @@ export default class View {
 
         })
     }
+
+    _initLocalListeners() {
+        this.todoList.addEventListener('input', e => {
+            if (e.target.className === 'editable') {
+                this._temporaryTodoText = e.target.innerText
+
+            }
+        })
+    }
+
+
+    bindEditTodo(handler) {
+        this.todoList.addEventListener('focusout', e => {
+            if (this._temporaryTodoText) {
+                const id = parseInt(e.target.parentElement.id)
+
+                handler(id, this._temporaryTodoText)
+                this._temporaryTodoText = ''
+            }
+        })
+    }
+
+    // Connect update todo with controller
+    bindEditTodo = (fn) => {
+        this.handleEditTodo = fn;
+    };
+    handleEdit = (todos) => {
+        this.handleEditTodo(todos);
+    };
 
 }
 
