@@ -48,6 +48,8 @@ export default class View {
                 const checkbox = this.createElement('input')
                 checkbox.type = 'checkbox'
                 checkbox.checked = todo.complete
+                checkbox.id = li.id
+
 
                 const span = this.createElement('span')
                 span.contentEditable = true
@@ -77,7 +79,7 @@ export default class View {
 
     bindAddTodo(handler) {
         this.input.addEventListener('keyup', e => {
-            e.preventDefault()
+
             // console.log(e.which)
 
             if (e.which === this.ENTER_KEY) {
@@ -91,7 +93,7 @@ export default class View {
 
     bindDeleteTodo(handler) {
         this.todoList.addEventListener('click', e => {
-            e.preventDefault()
+
             // console.log(e)
             if (e.target.className === 'delete') {
                 const id = parseInt(e.target.parentElement.id)
@@ -122,13 +124,8 @@ export default class View {
         })
     }
 
-    // Connect update todo with controller
-    bindEditTodo = (fn) => {
-        this.handleEditTodo = fn;
-    };
-    handleEdit = (todos) => {
-        this.handleEditTodo(todos);
-    };
+
+
 
 }
 
