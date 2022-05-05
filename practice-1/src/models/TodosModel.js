@@ -21,6 +21,7 @@ export default class Model {
         }
 
         this.todos.push(todo)
+
         this._commit(this.todos)
 
     }
@@ -36,6 +37,16 @@ export default class Model {
         this.todos = this.todos.map(todo =>
             todo.id === id ? { id: todo.id, text: updatedText, complete: todo.complete } : todo
         )
+
+        this._commit(this.todos)
+    }
+
+    //Select
+    toggleTodo(id) {
+        this.todos.map(todo => {
+            todo.id === id ? { id: todo.id, text: todo.text, complete: !todo.complete } : todo
+
+        })
 
         this._commit(this.todos)
     }
