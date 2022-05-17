@@ -37,17 +37,68 @@ async function request(url, params, method = 'GET') {
 
 }
 
+/**
+ * 
+ * @param {object} obj 
+ * @returns object
+ */
+function objectToQueryString(obj) {
+    return Object.keys(obj).map(key => key + '=' + obj[key]).join('&');
+}
+
+/**
+ * 
+ * @param {string} message 
+ * @returns string
+ */
+function generateErrorResponse(message) {
+    return {
+        status: 'error',
+        message
+    };
+}
+
+
+/**
+ * Use url and id to return result request to read data
+ * @param {string} url 
+ * @param {number} id 
+ * @returns result request to read data
+ */
+
 function get(url, params) {
     return request(url, params);
 }
+
+/**
+ * Use url and id to return result request to create data
+ * @param {string} url 
+ * @param {number} id 
+ * @returns result request to create data
+ */
+
 
 function create(url, params) {
     return request(url, params, 'POST');
 }
 
+/**
+ * Use url and id to return result request to update data
+ * @param {string} url 
+ * @param {number} id 
+ * @returns result request to update data
+ */
+
 function update(url, params) {
     return request(url, params, 'PUT');
 }
+
+/**
+ * Use url and id to return result request to delete data
+ * @param {string} url 
+ * @param {number} id 
+ * @returns result request to delete data
+ */
 
 function remove(url, params) {
     return request(url, params, 'DELETE');
