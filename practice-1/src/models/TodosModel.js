@@ -1,6 +1,9 @@
+import fetch from '../helpers/service'
+import path from '../constant'
+
 export default class Model {
     constructor() {
-        this.todos = JSON.parse(localStorage.getItem('todos')) || []
+        this.todos = []
     }
 
     bindTodoListChanged(callback) {
@@ -12,20 +15,43 @@ export default class Model {
         localStorage.setItem('todos', JSON.stringify(todos))
 
     }
-    // Add todo
-    addTodo(todoText) {
-        const todo = {
-            id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
+    /**
+     * 
+     * @param {string} id
+     * @param {string} todoText 
+     */
+    // addTodo(todoText) {
+    //     const todo = {
+    //         id: new Date().getTime().toString(),
+    //         text: todoText,
+    //         complete: false,
+    //     }
+
+    //     
+
+    //     this._commit(this.todos)
+
+    // }
+
+    async addTodo(todoText) {
+        await fetch.create(`/${path.PATH_TODO}`, {
+            id: new Date().getTime().toString(),
             text: todoText,
             complete: false,
-        }
-
-        this.todos.push(todo)
-
-        this._commit(this.todos)
+        })
+        // this.todos.push(todo)
 
     }
-    // delete todo
+
+    async getTodo() {
+        const todo = await fetch.get(`/${path.PATH_TODO}`)
+        console.log('todo', todo)
+        return todo
+    }
+    /**
+     * 
+     * @param {string} id 
+     */
     deleteTodo(id) {
         this.todos = this.todos.filter(todo => todo.id !== id)
 
@@ -42,15 +68,14 @@ export default class Model {
     }
 
     //Select
+
     toggleTodo(id) {
         this.todos.map(todo => {
             todo.id === id ? { id: todo.id, text: todo.text, complete: !todo.complete } : todo
 
         })
-
         this._commit(this.todos)
     }
-
 
 }
 
