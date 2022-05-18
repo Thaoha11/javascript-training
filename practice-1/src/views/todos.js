@@ -126,10 +126,10 @@ export default class View {
 
     bindToggleTodo(handler) {
         this.todoList.addEventListener('change', e => {
-            console.log(e)
+            // console.log(e)
             if (e.target.type === 'checkbox') {
                 const id = parseInt(e.target.parentElement.id)
-                console.log(id)
+
                 handler(id)
             }
         })
