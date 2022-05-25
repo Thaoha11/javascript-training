@@ -51,3 +51,15 @@ const gender = 'female'
     }
 }
 
+// /
+function count() {
+    let d = 0;
+    function handlerCount() {
+        return ++d;
+    }
+    return handlerCount
+}
+let kq = count();
+console.log(kq())
+
+document.body;

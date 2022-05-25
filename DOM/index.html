@@ -11,6 +11,14 @@
         .red {
             color: red;
         }
+
+        ul {
+            display: none;
+        }
+
+        input:focus~ul {
+            display: block;
+        }
     </style>
 
 </head>
@@ -57,14 +65,32 @@
         <span>DOM event 3</span>
     </h1> -->
 
-    <input type="text" />
-    <input type="checkbox" />
+    <!-- <input type="text" /> -->
+    <!-- <input type="checkbox" />
 
     <select>
         <option value="1">Javascript</option>
         <option value="2">PHP</option>
         <option value="3">Python</option>
-    </select>
+    </select> -->
+
+    <!-- preventDefault -->
+    <!-- <a href="https://www.facebook.com/">facebook</a>
+    <br />
+    <a href="https://www.google.com.vn">google</a>
+    <br>
+    <input placeholder="Search" />
+    <ul>
+        <li>Javascript</li>
+        <li>PHP</li>
+        <li>Python</li>
+    </ul> -->
+
+    <!-- stopPropagation -->
+    <div>
+        DIV
+        <button>Click me!</button>
+    </div>
 
     <!-- <script src='./example/dom.js'></script> -->
     <!-- <script src='./example/get_element.js'></script> -->
@@ -72,6 +98,7 @@
     <!-- <script src='./example/innerHTML_propertype.js'></script> -->
     <!-- <script src='./example/domCSS.js'></script> -->
     <!-- <script src='./example/classList_propertype.js'></script> -->
-    <script src='./example/dom_event.js'></script>
+    <!-- <script src='./example/dom_event.js'></script> -->
+    <script src='./example/event_listener.js'></script>
 
 </html>
