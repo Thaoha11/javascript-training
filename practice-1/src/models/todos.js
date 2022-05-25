@@ -26,8 +26,23 @@ export default class Model {
 
     }
 
+    /**
+     * Use API url from fetch import and param id from controller in delete todo
+     * @param {string} id 
+     */
 
+    async deleteTodo(id) {
+        await fetch.remove(`/${path.PATH_TODO}/${id}`)
 
+    }
+
+    async updateTodo(id, updateText, complete) {
+        await fetch.update(`/${path.PATH_TODO}/${id}`, {
+            id: id,
+            text: updateText,
+            complete: false
+        })
+    }
     /**
    * Use API url from fetch import in read data
    * @returns {array} todos.
