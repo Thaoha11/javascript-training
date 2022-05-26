@@ -52,7 +52,7 @@ export default class View {
                     span.contentEditable = true
                     span.classList.add('editable')
 
-                    if (todo.complete) {
+                    if (todo.complete === true) {
                         const strike = this.createElement('s')
                         strike.textContent = todo.text
                         span.append(strike)
@@ -94,6 +94,7 @@ export default class View {
         this.todoList.addEventListener('click', e => {
             // console.log(e)
             if (e.target.className === 'delete') {
+
                 const id = parseInt(e.target.parentElement.id)
                 handler(id)
             }
@@ -127,14 +128,14 @@ export default class View {
         this.todoList.addEventListener('change', e => {
             console.log(e)
             if (e.target.type === 'checkbox') {
+
                 const id = parseInt(e.target.parentElement.id)
 
-                handler(id, this._todoText)
+                handler(id)
             }
         })
 
     }
-
 
 }
 
