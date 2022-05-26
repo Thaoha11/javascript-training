@@ -36,20 +36,33 @@ export default class Model {
 
     }
 
-    async updateTodo(id, updateText, complete) {
+    /**
+     * Use API url from fetch import and param id from controller in update todo
+     * @param {string} id 
+     * @param {string} updateText 
+     */
+    async updateTodo(id, updateText) {
         await fetch.update(`/${path.PATH_TODO}/${id}`, {
             id: id,
             text: updateText,
-            complete: false
         })
     }
+
+    async toggleTodo(id, complete, todoText) {
+        await fetch.update(`/${path.PATH_TODO}/${id}`, {
+            id: id,
+            text: todoText,
+            complete: !complete
+        })
+    }
+
     /**
    * Use API url from fetch import in read data
    * @returns {array} todos.
    */
     async getTodo() {
         const todo = await fetch.get(`/${path.PATH_TODO}`)
-        // console.log('todo', todo)
+        console.log('todo', todo)
         return todo
     }
 }
