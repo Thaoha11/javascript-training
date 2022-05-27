@@ -47,12 +47,21 @@ export default class Model {
         })
     }
 
-    toggleTodo = async (id, complete, todoText) => {
-        await fetch.update(`/${path.PATH_TODO}/${id}`, {
-            id: id,
-            text: todoText,
-            complete: !complete
-        })
+    toggleTodo = async (id, complete) => {
+        const index = this.todos.findIndex(item => item.id === id)
+        const todo = this.todos[index]
+        const todoUpdated = {
+            id,
+            text: todo.text,
+            complete
+        }
+
+        this.todos.splice(index, 1, todoUpdated)
+        await fetch.update(`/${path.PATH_TODO}/${id}`, todoUpdated)
+        console.log("this.todods", this.todos)
+
+        return this.todos
+
     }
 
     /**
