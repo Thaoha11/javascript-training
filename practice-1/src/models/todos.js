@@ -2,6 +2,7 @@ import fetch from '../helpers/service'
 import path from '../constant'
 
 export default class Model {
+    todos = []
     constructor() {
         this.todos = []
     }
@@ -16,14 +17,12 @@ export default class Model {
      * @param {string} id 
      */
 
-    async addTodo(todoText) {
+    addTodo = async (todoText) => {
         await fetch.create(`/${path.PATH_TODO}`, {
             id: new Date().getTime().toString(),
             text: todoText,
             complete: false,
         })
-
-
     }
 
     /**
@@ -31,7 +30,7 @@ export default class Model {
      * @param {string} id 
      */
 
-    async deleteTodo(id) {
+    deleteTodo = async (id) => {
         await fetch.remove(`/${path.PATH_TODO}/${id}`)
 
     }
@@ -41,14 +40,14 @@ export default class Model {
      * @param {string} id 
      * @param {string} updateText 
      */
-    async updateTodo(id, updateText) {
+    updateTodo = async (id, updateText) => {
         await fetch.update(`/${path.PATH_TODO}/${id}`, {
             id: id,
             text: updateText,
         })
     }
 
-    async toggleTodo(id, complete, todoText) {
+    toggleTodo = async (id, complete, todoText) => {
         await fetch.update(`/${path.PATH_TODO}/${id}`, {
             id: id,
             text: todoText,
@@ -60,13 +59,10 @@ export default class Model {
    * Use API url from fetch import in read data
    * @returns {array} todos.
    */
-    async getTodo() {
+    getTodo = async () => {
         const todo = await fetch.get(`/${path.PATH_TODO}`)
-        console.log('todo', todo)
+        this.todos = todo;
+        console.log("todos", this.todos)
         return todo
     }
 }
-
-
-
-
