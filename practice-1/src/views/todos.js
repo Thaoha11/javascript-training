@@ -34,7 +34,7 @@ export default class View {
 
 
     displayTodos(todos) {
-        // getTodo().then(todo => {
+
         if (todos.length !== 0) {
             // clean UI todo-list
             const wrapper = document.getElementsByClassName("todo-list");
@@ -73,7 +73,6 @@ export default class View {
             })
         }
 
-        // })
 
     }
 
@@ -99,7 +98,7 @@ export default class View {
             // console.log(e)
             if (e.target.className === 'delete') {
 
-                const id = parseInt(e.target.parentElement.id)
+                const id = e.target.parentElement.id
                 handler(id)
             }
 
@@ -119,7 +118,7 @@ export default class View {
     bindUpdateTodo(handler) {
         this.todoList.addEventListener('focusout', e => {
             if (this._temporaryTodoText) {
-                const id = parseInt(e.target.parentElement.id)
+                const id = e.target.parentElement.id
 
                 handler(id, this._temporaryTodoText)
                 this._temporaryTodoText = ''
@@ -133,7 +132,7 @@ export default class View {
             console.log(e)
             if (e.target.type === 'checkbox') {
 
-                const id = parseInt(e.target.parentElement.id)
+                const id = e.target.parentElement.id
 
                 handler(id)
             }
