@@ -33,43 +33,47 @@ export default class View {
     }
 
 
-    displayTodos(getTodo) {
+    displayTodos(todos) {
+        // getTodo().then(todo => {
+        if (todos.length !== 0) {
+            // clean UI todo-list
+            const wrapper = document.getElementsByClassName("todo-list");
+            wrapper[0].innerHTML = "";
+            console.log('wrapper', wrapper)
 
-        getTodo().then(todo => {
-            if (todo.length !== 0) {
-                // Create nodes
-                todo.forEach(todo => {
-                    const li = this.createElement('li')
-                    li.id = todo.id
+            // Create nodes
+            todos.forEach(todo => {
+                const li = this.createElement('li')
+                li.id = todo.id
 
-                    const checkbox = this.createElement('input')
-                    checkbox.type = 'checkbox'
-                    checkbox.checked = todo.complete
-                    checkbox.id = li.id
+                const checkbox = this.createElement('input')
+                checkbox.type = 'checkbox'
+                checkbox.checked = todo.complete
+                checkbox.id = li.id
 
 
-                    const span = this.createElement('span')
-                    span.contentEditable = true
-                    span.classList.add('editable')
+                const span = this.createElement('span')
+                span.contentEditable = true
+                span.classList.add('editable')
 
-                    if (todo.complete === true) {
-                        const strike = this.createElement('s')
-                        strike.textContent = todo.text
-                        span.append(strike)
-                    } else {
-                        span.textContent = todo.text
-                    }
+                if (todo.complete) {
+                    const strike = this.createElement('s')
+                    strike.textContent = todo.text
+                    span.append(strike)
+                } else {
+                    span.textContent = todo.text
+                }
 
-                    const deleteButton = this.createElement('button', 'delete')
-                    deleteButton.textContent = 'x'
-                    li.append(checkbox, span, deleteButton)
+                const deleteButton = this.createElement('button', 'delete')
+                deleteButton.textContent = 'x'
+                li.append(checkbox, span, deleteButton)
 
-                    // Append nodes
-                    this.todoList.append(li)
-                })
-            }
+                // Append nodes
+                this.todoList.append(li)
+            })
+        }
 
-        })
+        // })
 
     }
 
@@ -138,4 +142,3 @@ export default class View {
     }
 
 }
-
