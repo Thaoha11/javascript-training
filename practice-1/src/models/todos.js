@@ -4,7 +4,7 @@ import path from '../constant'
 export default class Model {
     todos = []
     constructor() {
-        this.todos = []
+        // this.todos = []
     }
 
     bindTodoListChanged(callback) {
@@ -18,11 +18,16 @@ export default class Model {
      */
 
     addTodo = async (todoText) => {
-        await fetch.create(`/${path.PATH_TODO}`, {
+        const todoAdded = {
             id: new Date().getTime().toString(),
             text: todoText,
-            complete: false,
-        })
+            complete: false
+        }
+
+        this.todos.push(todoAdded)
+        await fetch.create(`/${path.PATH_TODO}`, todoAdded)
+
+        return this.todos
     }
 
     /**
@@ -31,8 +36,12 @@ export default class Model {
      */
 
     deleteTodo = async (id) => {
-        await fetch.remove(`/${path.PATH_TODO}/${id}`)
+        const index = this.todos.findIndex(item => item.id === id)
+        const todo = this.todos[index]
+        this.todos.splice(index, 1)
+        await fetch.remove(`/${path.PATH_TODO}/${id}`, todo)
 
+        return this.todos
     }
 
     /**
@@ -41,10 +50,17 @@ export default class Model {
      * @param {string} updateText 
      */
     updateTodo = async (id, updateText) => {
-        await fetch.update(`/${path.PATH_TODO}/${id}`, {
-            id: id,
-            text: updateText,
-        })
+
+        const index = this.todos.findIndex(item => item.id === id)
+        const todoUpdate = {
+            id,
+            text: updateText
+        }
+
+        this.todos.splice(index, 1, todoUpdate)
+        await fetch.update(`/${path.PATH_TODO}/${id}`, todoUpdate)
+
+        return this.todos
     }
 
     toggleTodo = async (id, complete) => {
@@ -58,11 +74,10 @@ export default class Model {
 
         this.todos.splice(index, 1, todoUpdated)
         await fetch.update(`/${path.PATH_TODO}/${id}`, todoUpdated)
-        console.log("this.todods", this.todos)
 
         return this.todos
-
     }
+
 
     /**
    * Use API url from fetch import in read data
@@ -70,7 +85,7 @@ export default class Model {
    */
     getTodo = async () => {
         const todo = await fetch.get(`/${path.PATH_TODO}`)
-        this.todos = todo;
+        this.todos = todo
         console.log("todos", this.todos)
         return todo
     }
