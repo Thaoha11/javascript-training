@@ -24,22 +24,24 @@ export default class Controller {
         this.view.displayTodos(todos)
     }
 
-    handleAddTodo = todoText => {
-        this.model.addTodo(todoText)
+    handleAddTodo = async todoText => {
+        const todos = await this.model.addTodo(todoText)
+        this.view.displayTodos(todos)
+    }
+
+    handleDeleteTodo = async id => {
+        const todos = await this.model.deleteTodo(id)
+        this.view.displayTodos(todos)
 
     }
 
-    handleDeleteTodo = id => {
-        this.model.deleteTodo(id)
+    handleUpdateTodo = async (id, todoText) => {
+        const todos = await this.model.updateTodo(id, todoText)
+        this.view.displayTodos(todos)
 
-    }
-
-    handleUpdateTodo = (id, todoText) => {
-        this.model.updateTodo(id, todoText)
     }
     handleToggleTodo = async (id, complete) => {
         const todos = await this.model.toggleTodo(id, complete)
-        console.log(todos)
         this.view.displayTodos(todos)
     }
 
