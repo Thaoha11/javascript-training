@@ -3,8 +3,10 @@ import path from '../constant'
 
 export default class Model {
     todos = []
+
     constructor() {
         // this.todos = []
+
     }
 
     bindTodoListChanged(callback) {
@@ -54,7 +56,8 @@ export default class Model {
         const index = this.todos.findIndex(item => item.id === id)
         const todoUpdate = {
             id,
-            text: updateText
+            text: updateText,
+            complete: false
         }
 
         this.todos.splice(index, 1, todoUpdate)
@@ -63,8 +66,10 @@ export default class Model {
         return this.todos
     }
 
+
     toggleTodo = async (id, complete) => {
         const index = this.todos.findIndex(item => item.id === id)
+
         const todo = this.todos[index]
         const todoUpdated = {
             id,
@@ -78,15 +83,35 @@ export default class Model {
         return this.todos
     }
 
+    toggleCheckAll = async (id, complete) => {
+        this.todos.forEach(item => item.complete = !item.complete)
+
+
+        // const todoUpdated = {
+        //     id,
+        //     text: this.todos.text,
+        //     complete,
+
+        // }
+        const todoUpdated = this.todos.map(e => { return { ...e, complete: true } })
+        console.log(todoUpdated)
+        await fetch.updateAll(`/${path.PATH_TODO}`,
+            todoUpdated
+        )
+
+        return this.todos
+    }
+
+
 
     /**
-   * Use API url from fetch import in read data
-   * @returns {array} todos.
-   */
+     * Use API url from fetch import in read data
+     * @returns {array} todos.
+     */
     getTodo = async () => {
         const todo = await fetch.get(`/${path.PATH_TODO}`)
         this.todos = todo
-        console.log("todos", this.todos)
+        // console.log("todos", this.todos)
         return todo
     }
 }
