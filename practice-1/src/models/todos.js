@@ -3,7 +3,7 @@ import path from '../constant'
 
 export default class Model {
     todos = []
-
+    clearAll = []
     constructor() {
         // this.todos = []
 
@@ -83,22 +83,17 @@ export default class Model {
         return this.todos
     }
 
-    toggleCheckAll = async (id, complete) => {
-        this.todos.forEach(item => item.complete = !item.complete)
+    toggleCheckAll = async (complete) => {
+        this.todos.forEach(item => item.complete = complete)
 
-
-
-        // const todoUpdated = {
-        //     id,
-        //     text: this.todos.text,
-        //     complete,
-
-        // }
-        const todoUpdated = this.todos.map(e => { return { ...e, complete: true } })
+        const todoUpdated = this.todos.map(e => { return { ...e, complete } })
         console.log(todoUpdated)
-        await fetch.updateAll(`/${path.PATH_TODO}`,
-            todoUpdated
+        Promise.all(
+            todoUpdated.map(async (todo) => {
+                await fetch.update(`/${path.PATH_TODO}/${todo.id}`, todo)
+            })
         )
+
 
         return this.todos
 
