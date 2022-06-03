@@ -1,38 +1,23 @@
 {
   "todos": [
     {
-      "id": "1",
-      "text": "Captains",
-      "complete": false
+      "id": "1653893166835",
+      "text": "oh sehunsdds",
+      "complete": true
     },
     {
-      "id": "2",
-      "text": "Iron man",
-      "complete": false
+      "id": "1654065716308",
+      "text": "has",
+      "complete": true
     },
     {
-      "id": "3",
-      "text": "Ant mans",
-      "complete": false
+      "id": "1654065717950",
+      "text": "quang",
+      "complete": true
     },
     {
-      "id": "4",
-      "text": "Spider man",
-      "complete": false
-    },
-    {
-      "id": "5",
-      "text": "Thor",
-      "complete": false
-    },
-    {
-      "id": "6",
-      "text": "Wanda",
-      "complete": false
-    },
-    {
-      "id": "1653489111408",
-      "text": "d",
+      "id": "1654079433470",
+      "text": "thao",
       "complete": false
     }
   ]

@@ -87,6 +87,7 @@ export default class Model {
         this.todos.forEach(item => item.complete = !item.complete)
 
 
+
         // const todoUpdated = {
         //     id,
         //     text: this.todos.text,
@@ -100,9 +101,25 @@ export default class Model {
         )
 
         return this.todos
+
     }
 
+    getCount = async () => {
+        const tol = {
+            complete: 0,
+            active: 0,
 
+        }
+        this.todos.forEach(item => {
+            if (item.complete) {
+                tol.complete++
+            }
+            else {
+                tol.active++
+            }
+        })
+
+    }
 
     /**
      * Use API url from fetch import in read data

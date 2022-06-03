@@ -22,6 +22,7 @@ async function request(url, params, method = 'GET') {
             url += '?' + objectToQueryString(params);
         } else {
             options.body = JSON.stringify(params);
+
         }
     }
 
@@ -93,6 +94,10 @@ function update(url, params) {
     return request(url, params, 'PUT');
 }
 
+function updateAll(url, params) {
+
+    return request(url, params, 'PATCH');
+}
 /**
  * Use url and id to return result request to delete data
  * @param {string} url 
@@ -108,6 +113,7 @@ export default {
     get,
     create,
     update,
-    remove
+    remove,
+    updateAll
 }
 

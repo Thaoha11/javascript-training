@@ -4,10 +4,15 @@ export default class View {
         this.ENTER_KEY = 13
         this.input = this.getElement('.new-todo')
         this.main = this.getElement('.main')
-        this.todoList = this.getElement('ul')
+        this.todoList = this.getElement('.todo-list')
+        this.clearComplete = this.getElement('.clear-completed')
+
+        this.toggleAll = this.getElement('#toggle-all')
 
         this._temporaryTodoText = ''
         this._initLocalListeners()
+        this.complete = this.getElement('.completed')
+        this.completedTodo = []
     }
 
     get _todoText() {
@@ -34,12 +39,12 @@ export default class View {
 
 
     displayTodos(todos) {
-
         if (todos.length !== 0) {
+
             // clean UI todo-list
-            const wrapper = document.getElementsByClassName("todo-list");
-            wrapper[0].innerHTML = "";
-            console.log('wrapper', wrapper)
+            const wrapper = document.getElementsByClassName("todo-list")
+            wrapper[0].innerHTML = ""
+            // console.log('wrapper', wrapper)
 
             // Create nodes
             todos.forEach(todo => {
@@ -56,13 +61,24 @@ export default class View {
                 span.contentEditable = true
                 span.classList.add('editable')
 
-                if (todo.complete) {
+
+                if (todo.complete === true) {
                     const strike = this.createElement('s')
                     strike.textContent = todo.text
                     span.append(strike)
+
+
+                    this.clearComplete.style.display = 'block'
+
                 } else {
+
                     span.textContent = todo.text
+                    // this.clearComplete.style.display = 'none'
+
+
                 }
+                // toggleAll
+
 
                 const deleteButton = this.createElement('button', 'delete')
                 deleteButton.textContent = 'x'
@@ -128,16 +144,37 @@ export default class View {
     }
 
     bindToggleTodo(handler) {
+
         this.todoList.addEventListener('change', e => {
-            console.log(e)
             if (e.target.type === 'checkbox') {
 
                 const id = e.target.parentElement.id
 
-                handler(id)
+                handler(id, e.target.checked)
+
             }
+
         })
 
+    }
+
+    bindToggleCheckAll(handler) {
+        this.toggleAll.addEventListener('click', e => {
+            console.log(e)
+            if (e.target.type === 'checkbox') {
+                console.log(1)
+
+                handler(e.target.checked)
+
+            }
+
+        })
+    }
+
+    bindCompeled(handler) {
+        this.complete.addEventListener('click', e => {
+            this.completedTodo
+        })
     }
 
 }
