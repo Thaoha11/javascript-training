@@ -171,10 +171,6 @@ export default class View {
         })
     }
 
-    bindCompeled(handler) {
-        this.complete.addEventListener('click', e => {
-            this.completedTodo
-        })
-    }
+
 
 }
