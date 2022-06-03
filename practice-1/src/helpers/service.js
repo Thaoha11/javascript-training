@@ -94,10 +94,6 @@ function update(url, params) {
     return request(url, params, 'PUT');
 }
 
-function updateAll(url, params) {
-
-    return request(url, params, 'PATCH');
-}
 /**
  * Use url and id to return result request to delete data
  * @param {string} url 
@@ -114,6 +110,5 @@ export default {
     create,
     update,
     remove,
-    updateAll
 }
 
