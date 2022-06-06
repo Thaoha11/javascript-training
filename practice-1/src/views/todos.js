@@ -162,8 +162,7 @@ export default class View {
         this.toggleAll.addEventListener('click', e => {
             console.log(e)
             if (e.target.type === 'checkbox') {
-                console.log(1)
-
+                // const id = e.target.parentElement.id
                 handler(e.target.checked)
 
             }
@@ -171,6 +170,14 @@ export default class View {
         })
     }
 
+    bindDeleteAllTodo(handler) {
+        this.clearComplete.addEventListener('click', e => {
 
+
+            handler(this.todoList)
+
+        })
+    }
 
 }
+

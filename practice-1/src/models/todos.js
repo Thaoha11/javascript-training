@@ -87,19 +87,32 @@ export default class Model {
         this.todos.forEach(item => item.complete = complete)
 
         const todoUpdated = this.todos.map(e => { return { ...e, complete } })
-        console.log(todoUpdated)
+
         Promise.all(
             todoUpdated.map(async (todo) => {
                 await fetch.update(`/${path.PATH_TODO}/${todo.id}`, todo)
             })
         )
 
-
         return this.todos
 
     }
 
+    deleteAllTodo = async (complete) => {
 
+        // const todoUpdated = this.todos.map(e => { return { ...e, complete } },)
+
+        const todoUpdated = this.todos.map(e => e.complete === true ? { ...e } : this.todos)
+        console.log(todoUpdated)
+
+        Promise.all(
+            todoUpdated.map(async (todo) => {
+                await fetch.remove(`/${path.PATH_TODO}/${todo.id}`, todoUpdated)
+            })
+        )
+
+        return this.todos
+    }
 
     /**
      * Use API url from fetch import in read data

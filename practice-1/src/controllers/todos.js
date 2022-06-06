@@ -10,7 +10,7 @@ export default class Controller {
         this.view.bindUpdateTodo(this.handleUpdateTodo)
         this.view.bindToggleTodo(this.handleToggleTodo)
         this.view.bindToggleCheckAll(this.handleToggleCheckAll)
-
+        this.view.bindDeleteAllTodo(this.handleDeleteAllTodo)
         // Display initial todos
         this.onTodoListChanged(this.model.getTodo)
     }
@@ -41,12 +41,17 @@ export default class Controller {
         this.view.displayTodos(todos)
 
     }
-    handleToggleTodo = async (id, complete, clearComplete) => {
-        const todos = await this.model.toggleTodo(id, complete, clearComplete)
+    handleToggleTodo = async (id, complete) => {
+        const todos = await this.model.toggleTodo(id, complete)
         this.view.displayTodos(todos)
     }
-    handleToggleCheckAll = async (id, complete) => {
-        const todos = await this.model.toggleCheckAll(id, complete)
+    handleToggleCheckAll = async (complete) => {
+        const todos = await this.model.toggleCheckAll(complete)
+        this.view.displayTodos(todos)
+    }
+
+    handleDeleteAllTodo = async (id) => {
+        const todos = await this.model.deleteAllTodo(id)
         this.view.displayTodos(todos)
     }
 
