@@ -11,6 +11,7 @@ export default class Controller {
         this.view.bindToggleTodo(this.handleToggleTodo)
         this.view.bindToggleCheckAll(this.handleToggleCheckAll)
         this.view.bindDeleteAllTodo(this.handleDeleteAllTodo)
+        // this.view.bindListCompleted(this.handleListCompleted)
         // Display initial todos
         this.onTodoListChanged(this.model.getTodo)
     }
@@ -50,9 +51,12 @@ export default class Controller {
         this.view.displayTodos(todos)
     }
 
-    handleDeleteAllTodo = async (id) => {
-        const todos = await this.model.deleteAllTodo(id)
+    handleDeleteAllTodo = async () => {
+        const todos = await this.model.deleteAllTodo()
         this.view.displayTodos(todos)
     }
-
+    // handlehandleListCompleted = async (list) => {
+    //     const todos = await this.model.ListCompleted(id)
+    //     this.view.displayTodos(todos)
+    // }
 }

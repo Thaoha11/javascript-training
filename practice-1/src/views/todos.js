@@ -11,7 +11,7 @@ export default class View {
 
         this._temporaryTodoText = ''
         this._initLocalListeners()
-        this.complete = this.getElement('.completed')
+        this.completed = this.getElement('.completed')
         this.completedTodo = []
     }
 
@@ -45,9 +45,11 @@ export default class View {
             const wrapper = document.getElementsByClassName("todo-list")
             wrapper[0].innerHTML = ""
             // console.log('wrapper', wrapper)
+            let ishowClearText = false
 
             // Create nodes
             todos.forEach(todo => {
+
                 const li = this.createElement('li')
                 li.id = todo.id
 
@@ -66,16 +68,9 @@ export default class View {
                     const strike = this.createElement('s')
                     strike.textContent = todo.text
                     span.append(strike)
-
-
-                    this.clearComplete.style.display = 'block'
-
+                    ishowClearText = true
                 } else {
-
                     span.textContent = todo.text
-                    // this.clearComplete.style.display = 'none'
-
-
                 }
                 // toggleAll
 
@@ -87,6 +82,12 @@ export default class View {
                 // Append nodes
                 this.todoList.append(li)
             })
+            if (ishowClearText) {
+                this.clearComplete.style.display = 'block'
+            }
+            else {
+                this.clearComplete.style.display = 'none'
+            }
         }
 
 
@@ -146,6 +147,7 @@ export default class View {
     bindToggleTodo(handler) {
 
         this.todoList.addEventListener('change', e => {
+
             if (e.target.type === 'checkbox') {
 
                 const id = e.target.parentElement.id
@@ -160,7 +162,7 @@ export default class View {
 
     bindToggleCheckAll(handler) {
         this.toggleAll.addEventListener('click', e => {
-            console.log(e)
+
             if (e.target.type === 'checkbox') {
                 // const id = e.target.parentElement.id
                 handler(e.target.checked)
@@ -172,12 +174,12 @@ export default class View {
 
     bindDeleteAllTodo(handler) {
         this.clearComplete.addEventListener('click', e => {
-
-
+            this.todoList.innerHTML = ''
             handler(this.todoList)
 
         })
     }
+
 
 }
 

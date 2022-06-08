@@ -3,7 +3,7 @@ import path from '../constant'
 
 export default class Model {
     todos = []
-    clearAll = []
+
     constructor() {
         // this.todos = []
 
@@ -98,21 +98,20 @@ export default class Model {
 
     }
 
-    deleteAllTodo = async (complete) => {
-
-        // const todoUpdated = this.todos.map(e => { return { ...e, complete } },)
-
-        const todoUpdated = this.todos.map(e => e.complete === true ? { ...e } : this.todos)
+    deleteAllTodo = async () => {
+        const todoUpdated = this.todos.filter(e => e.complete === true)
         console.log(todoUpdated)
-
         Promise.all(
             todoUpdated.map(async (todo) => {
-                await fetch.remove(`/${path.PATH_TODO}/${todo.id}`, todoUpdated)
+                await fetch.remove(`/${path.PATH_TODO}/${todo.id}`, todo)
             })
         )
-
+        const newTodos = this.todos.filter(e => e.complete !== true)
+        this.todos = newTodos
         return this.todos
     }
+
+
 
     /**
      * Use API url from fetch import in read data
