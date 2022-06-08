@@ -12,7 +12,6 @@ export default class View {
         this._temporaryTodoText = ''
         this._initLocalListeners()
         this.completed = this.getElement('.completed')
-        this.completedTodo = []
     }
 
     get _todoText() {
@@ -68,12 +67,13 @@ export default class View {
                     const strike = this.createElement('s')
                     strike.textContent = todo.text
                     span.append(strike)
+
                     ishowClearText = true
+
                 } else {
                     span.textContent = todo.text
                 }
                 // toggleAll
-
 
                 const deleteButton = this.createElement('button', 'delete')
                 deleteButton.textContent = 'x'
@@ -92,6 +92,7 @@ export default class View {
 
 
     }
+
 
     bindAddTodo(handleAddTodo) {
         this.input.addEventListener('keyup', e => {
@@ -174,12 +175,17 @@ export default class View {
 
     bindDeleteAllTodo(handler) {
         this.clearComplete.addEventListener('click', e => {
-            this.todoList.innerHTML = ''
+            // this.todoList.innerHTML = ''
             handler(this.todoList)
 
         })
     }
 
+    bindListCompleted(handler) {
+        this.completed.addEventListener('click', e => {
 
+            handler(this.todoList)
+        })
+    }
 }
 

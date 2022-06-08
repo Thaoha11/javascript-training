@@ -3,7 +3,7 @@ import path from '../constant'
 
 export default class Model {
     todos = []
-
+    completed = []
     constructor() {
         // this.todos = []
 
@@ -111,7 +111,12 @@ export default class Model {
         return this.todos
     }
 
-
+    listCompleted = async () => {
+        const newTodos = this.todos.filter(e => e.complete)
+        this.todos = newTodos
+        console.log(this.todos)
+        return this.todos
+    }
 
     /**
      * Use API url from fetch import in read data
