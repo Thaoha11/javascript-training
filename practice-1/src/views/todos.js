@@ -11,7 +11,9 @@ export default class View {
 
         this._temporaryTodoText = ''
         this._initLocalListeners()
+
         this.completed = this.getElement('.completed')
+        this.active = this.getElement('.active')
     }
 
     get _todoText() {
@@ -187,5 +189,13 @@ export default class View {
             handler(this.todoList)
         })
     }
+
+    bindListActive(handler) {
+        this.active.addEventListener('click', e => {
+
+            handler(this.todoList)
+        })
+    }
+
 }
 

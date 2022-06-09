@@ -108,13 +108,20 @@ export default class Model {
         )
         const newTodos = this.todos.filter(e => e.complete !== true)
         this.todos = newTodos
+
         return this.todos
     }
 
     listCompleted = async () => {
-        const newTodos = this.todos.filter(e => e.complete)
-        this.todos = newTodos
+        const newListCompeted = this.todos.filter(e => e.complete)
+        this.todos = newListCompeted
         console.log(this.todos)
+        return this.todos
+    }
+
+    listActive = async () => {
+        const newListActive = this.todos.filter(e => e.complete !== true)
+        this.todos = newListActive
         return this.todos
     }
 
