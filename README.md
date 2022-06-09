@@ -13,12 +13,17 @@ This document provides information about Javascript practice. Build ToDos List w
 - JSON Server
 
 # Timeline		
-5 working days (Apr 25, 2022, to May 02, 2022)
+30 working days (Apr 25, 2022, to June 09, 2022)
+
+# Plan
+- Plan on github [project](https://github.com/Thaoha11/javascript-training/projects/1)
+- [Estimation](https://docs.google.com/document/d/1K8svZLWJDcqze2Bgd8Tdpe5QSXnK2s2J/edit)
 
 # Targets
 - Selecting Elements, Getting Values, and Setting Values.
 - Attributes, Classes and CSS Manipulation.
 - DOM manipulation with simple table, form.
+- MVC pattern
 
 # Installation
 - Step 1 :clone repository
