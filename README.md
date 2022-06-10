@@ -25,6 +25,10 @@ This document provides information about Javascript practice. Build ToDos List w
 - DOM manipulation with simple table, form.
 - MVC pattern
 
+# REFERENCES
+- [JSON server](https://github.com/typicode/json-server)
+- [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+
 # Installation
 - Step 1 :clone repository
 ```bash
