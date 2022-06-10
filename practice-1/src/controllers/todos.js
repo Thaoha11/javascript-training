@@ -7,29 +7,61 @@ export default class Controller {
         this.model.bindTodoListChanged(this.onTodoListChanged)
         this.view.bindAddTodo(this.handleAddTodo)
         this.view.bindDeleteTodo(this.handleDeleteTodo)
-        this.view.bindEditTodo(this.handleEditTodo)
+        this.view.bindUpdateTodo(this.handleUpdateTodo)
         this.view.bindToggleTodo(this.handleToggleTodo)
+        this.view.bindToggleCheckAll(this.handleToggleCheckAll)
+        this.view.bindDeleteAllTodo(this.handleDeleteAllTodo)
+        this.view.bindListCompleted(this.handleListCompleted)
+        this.view.bindListActive(this.handleListActive)
         // Display initial todos
-        this.onTodoListChanged(this.model.todos)
+        this.onTodoListChanged(this.model.getTodo)
+    }
+
+    init = async () => {
+        const todos = await this.model.getTodo();
+        console.log("todos", todos);
+        this.view.displayTodos(todos);
     }
 
     onTodoListChanged = todos => {
         this.view.displayTodos(todos)
     }
 
-    handleAddTodo = todoText => {
-        this.model.addTodo(todoText)
+    handleAddTodo = async todoText => {
+        const todos = await this.model.addTodo(todoText)
+        this.view.displayTodos(todos)
     }
 
-    handleDeleteTodo = id => {
-        this.model.deleteTodo(id)
+    handleDeleteTodo = async id => {
+        const todos = await this.model.deleteTodo(id)
+        this.view.displayTodos(todos)
+
     }
 
-    handleEditTodo = (id, todoText) => {
-        this.model.editTodo(id, todoText)
+    handleUpdateTodo = async (id, todoText, complete) => {
+        const todos = await this.model.updateTodo(id, todoText, complete)
+        this.view.displayTodos(todos)
+
     }
-    handleToggleTodo = id => {
-        this.model.toggleTodo(id)
+    handleToggleTodo = async (id, complete) => {
+        const todos = await this.model.toggleTodo(id, complete)
+        this.view.displayTodos(todos)
+    }
+    handleToggleCheckAll = async (complete) => {
+        const todos = await this.model.toggleCheckAll(complete)
+        this.view.displayTodos(todos)
     }
 
+    handleDeleteAllTodo = async () => {
+        const todos = await this.model.deleteAllTodo()
+        this.view.displayTodos(todos)
+    }
+    handleListCompleted = async () => {
+        const todos = await this.model.listCompleted()
+        this.view.displayTodos(todos)
+    }
+    handleListActive = async () => {
+        const todos = await this.model.listActive()
+        this.view.displayTodos(todos)
+    }
 }

@@ -1,7 +1,8 @@
 //  Async Syntax
 
-async function myFunction(reject) {
+async function myFunction() {
     return 'hello';
+
 }
 
 myFunction()
@@ -35,12 +36,12 @@ myDisplay();
 
 // fectch API
 
-const getNewTodo = async (id) => {
-    let res = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
-    let data = await res.json();
-    return data;
-}
+// const getNewTodo = async (id) => {
+//     let res = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
+//     let data = await res.json();
+//     return data;
+// }
 
-getNewTodo(3).then(data => {
-    console.log('data:', data)
-})
+// getNewTodo(3).then(data => {
+//     console.log('data:', data)
+// })

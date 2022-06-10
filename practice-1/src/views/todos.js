@@ -4,10 +4,16 @@ export default class View {
         this.ENTER_KEY = 13
         this.input = this.getElement('.new-todo')
         this.main = this.getElement('.main')
-        this.todoList = this.getElement('ul')
+        this.todoList = this.getElement('.todo-list')
+        this.clearComplete = this.getElement('.clear-completed')
+
+        this.toggleAll = this.getElement('#toggle-all')
 
         this._temporaryTodoText = ''
         this._initLocalListeners()
+
+        this.completed = this.getElement('.completed')
+        this.active = this.getElement('.active')
     }
 
     get _todoText() {
@@ -32,16 +38,19 @@ export default class View {
         return element
     }
 
-    displayTodos(todos) {
-        // Delete all nodes
-        while (this.todoList.firstChild) {
-            this.todoList.removeChild(this.todoList.firstChild)
-        }
 
-        // Show default message
+    displayTodos(todos) {
         if (todos.length !== 0) {
+
+            // clean UI todo-list
+            const wrapper = document.getElementsByClassName("todo-list")
+            wrapper[0].innerHTML = ""
+            // console.log('wrapper', wrapper)
+            let ishowClearText = false
+
             // Create nodes
             todos.forEach(todo => {
+
                 const li = this.createElement('li')
                 li.id = todo.id
 
@@ -55,13 +64,18 @@ export default class View {
                 span.contentEditable = true
                 span.classList.add('editable')
 
-                if (todo.complete) {
+
+                if (todo.complete === true) {
                     const strike = this.createElement('s')
                     strike.textContent = todo.text
                     span.append(strike)
+
+                    ishowClearText = true
+
                 } else {
                     span.textContent = todo.text
                 }
+                // toggleAll
 
                 const deleteButton = this.createElement('button', 'delete')
                 deleteButton.textContent = 'x'
@@ -70,33 +84,41 @@ export default class View {
                 // Append nodes
                 this.todoList.append(li)
             })
+            if (ishowClearText) {
+                this.clearComplete.style.display = 'block'
+            }
+            else {
+                this.clearComplete.style.display = 'none'
+            }
         }
 
-        // Debugging
-        // console.log(todos)
+
     }
 
 
-    bindAddTodo(handler) {
+    bindAddTodo(handleAddTodo) {
         this.input.addEventListener('keyup', e => {
-
-            // console.log(e.which)
 
             if (e.which === this.ENTER_KEY) {
                 if (this._todoText) {
-                    handler(this._todoText)
+                    handleAddTodo(this._todoText)
                     this._resetInput()
                 }
+
             }
+
         })
+
     }
+
+
 
     bindDeleteTodo(handler) {
         this.todoList.addEventListener('click', e => {
-
             // console.log(e)
             if (e.target.className === 'delete') {
-                const id = parseInt(e.target.parentElement.id)
+
+                const id = e.target.parentElement.id
                 handler(id)
             }
 
@@ -106,36 +128,74 @@ export default class View {
     _initLocalListeners() {
         this.todoList.addEventListener('input', e => {
             if (e.target.className === 'editable') {
+                //Save the new input value in a temporary variable    
                 this._temporaryTodoText = e.target.innerText
-
             }
         })
     }
 
 
-    bindEditTodo(handler) {
+    bindUpdateTodo(handler) {
         this.todoList.addEventListener('focusout', e => {
             if (this._temporaryTodoText) {
-                const id = parseInt(e.target.parentElement.id)
+                const id = e.target.parentElement.id
 
                 handler(id, this._temporaryTodoText)
                 this._temporaryTodoText = ''
             }
         })
+
     }
 
     bindToggleTodo(handler) {
-        this.todoList.addEventListener('change', e => {
-            // console.log(e)
-            if (e.target.type === 'checkbox') {
-                const id = parseInt(e.target.parentElement.id)
 
-                handler(id)
+        this.todoList.addEventListener('change', e => {
+
+            if (e.target.type === 'checkbox') {
+
+                const id = e.target.parentElement.id
+
+                handler(id, e.target.checked)
+
             }
+
         })
 
     }
 
+    bindToggleCheckAll(handler) {
+        this.toggleAll.addEventListener('click', e => {
+
+            if (e.target.type === 'checkbox') {
+                // const id = e.target.parentElement.id
+                handler(e.target.checked)
+
+            }
+
+        })
+    }
+
+    bindDeleteAllTodo(handler) {
+        this.clearComplete.addEventListener('click', e => {
+            // this.todoList.innerHTML = ''
+            handler(this.todoList)
+
+        })
+    }
+
+    bindListCompleted(handler) {
+        this.completed.addEventListener('click', e => {
+
+            handler(this.todoList)
+        })
+    }
+
+    bindListActive(handler) {
+        this.active.addEventListener('click', e => {
+
+            handler(this.todoList)
+        })
+    }
 
 }
 

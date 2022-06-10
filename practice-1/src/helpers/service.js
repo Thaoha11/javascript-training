@@ -22,6 +22,7 @@ async function request(url, params, method = 'GET') {
             url += '?' + objectToQueryString(params);
         } else {
             options.body = JSON.stringify(params);
+
         }
     }
 
@@ -108,6 +109,6 @@ export default {
     get,
     create,
     update,
-    remove
+    remove,
 }
 

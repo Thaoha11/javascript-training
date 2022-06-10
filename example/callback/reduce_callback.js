@@ -13,7 +13,7 @@ Array.prototype.reduce1 = function (callback, InitialValue) {
 }
 var NumberArray = [1, 2, 10]
 function sumHandler(previousValue, currentValue) {
-    // console.log(previousValue)
+    //; console.log(previousValue)
     return previousValue + currentValue;
 
 }
