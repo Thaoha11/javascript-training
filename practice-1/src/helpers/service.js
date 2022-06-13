@@ -35,7 +35,6 @@ async function request(url, params, method = 'GET') {
     const result = await response.json();
 
     return result;
-
 }
 
 /**

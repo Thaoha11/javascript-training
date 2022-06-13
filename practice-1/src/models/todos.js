@@ -64,7 +64,12 @@ export default class Model {
         return this.todos
     }
 
-
+    /**
+     * Use API url from fetch import and param id from controller in update todo
+     * @param {*} id 
+     * @param {*} complete 
+     * @returns {array} todos
+     */
     toggleTodo = async (id, complete) => {
         const index = this.todos.findIndex(item => item.id === id)
         const todo = this.todos[index]
@@ -79,7 +84,11 @@ export default class Model {
 
         return this.todos
     }
-
+    /**
+     * Use API url from fetch import and param id from controller in update todo
+     * @param {*} complete 
+     * @returns {array} todos
+     */
     toggleCheckAll = async (complete) => {
         this.todos.forEach(item => item.complete = complete)
         const todoUpdated = this.todos.map(e => { return { ...e, complete } })
@@ -93,7 +102,10 @@ export default class Model {
         return this.todos
 
     }
-
+    /**
+     * Use API url from fetch import and param id from controller in update todo
+     * @returns {array} todos
+     */
     deleteAllTodo = async () => {
         const todoUpdated = this.todos.filter(e => e.complete === true)
 
@@ -108,14 +120,20 @@ export default class Model {
 
         return this.todos
     }
-
+    /**
+     * Filter all todos was complete
+     * @returns {array} todos
+     */
     listCompleted = async () => {
         const newListCompeted = this.todos.filter(e => e.complete)
         this.todos = newListCompeted
 
         return this.todos
     }
-
+    /**
+     * Filter all todos are activating
+     * @returns {array} todos
+     */
     listActive = async () => {
         const newListActive = this.todos.filter(e => e.complete !== true)
         this.todos = newListActive
