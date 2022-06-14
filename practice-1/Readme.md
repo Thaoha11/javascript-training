@@ -4,7 +4,7 @@
 This document provides information about Javascript practice. Build ToDos List website
 
 # Screenshots
-![Screenshot](./practice-1/src/assets/image/todo.png)
+![Screenshot](./src/assets/image/todo.png)
 
 # Technical
 - HTML5/CSS3
