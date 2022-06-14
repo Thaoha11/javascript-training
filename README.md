@@ -13,7 +13,7 @@ This document provides information about Javascript practice. Build ToDos List w
 - JSON Server
 
 # Timeline		
-30 working days (Apr 25, 2022, to June 09, 2022)
+20 working days (Apr 25, 2022, to June 09, 2022)
 
 # Plan
 - Plan on github [project](https://github.com/Thaoha11/javascript-training/projects/1)
